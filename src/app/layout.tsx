@@ -3,8 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Portfolio | Software Developer",
-  description: "A modern portfolio showcasing software development projects and skills",
+  title: "Rupin Ajay | Software Engineer",
+  description: "Software Engineer specializing in AI/ML systems, RAG architectures, and full-stack development. Currently SDE Intern at Linarc.",
 };
 
 export default function RootLayout({

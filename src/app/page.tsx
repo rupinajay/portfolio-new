@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { GitHubContributions } from "@/components/github-contributions";
+import { Terminal } from "@/components/terminal";
 import { 
   SiPython, 
   SiJavascript, 
@@ -18,12 +19,57 @@ import { DiDatabase } from "react-icons/di";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [showTerminal, setShowTerminal] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    // Check URL parameter for terminal mode
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('terminal') === 'true') {
+      setShowTerminal(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showTerminal) {
+        setShowTerminal(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [showTerminal]);
+
+  // Sync state → URL
+  useEffect(() => {
+    if (!mounted) return;
+    const url = new URL(window.location.href);
+    if (showTerminal) {
+      url.searchParams.set('terminal', 'true');
+    } else {
+      url.searchParams.delete('terminal');
+    }
+    if (url.toString() !== window.location.href) {
+      window.history.replaceState({}, '', url.toString());
+    }
+  }, [showTerminal, mounted]);
+
+  // Sync URL → state on browser back/forward
+  useEffect(() => {
+    const onPop = () => {
+      const params = new URLSearchParams(window.location.search);
+      setShowTerminal(params.get('terminal') === 'true');
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
   }, []);
 
   if (!mounted) return null;
+
+  if (showTerminal) {
+    return <Terminal onClose={() => setShowTerminal(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,6 +84,16 @@ export default function Home() {
             <a href="#education" className="text-muted-foreground hover:text-foreground transition-colors">Education</a>
           </nav>
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowTerminal(true)}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              title="Open Terminal"
+              aria-label="Open Terminal"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </button>
             <ThemeToggle />
           </div>
         </div>

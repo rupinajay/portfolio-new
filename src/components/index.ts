@@ -8,3 +8,4 @@ export { Footer } from "./footer";
 export { ThemeProvider } from "./theme-provider";
 export { ThemeToggle } from "./theme-toggle";
 export { GitHubContributions } from "./github-contributions";
+export { Terminal } from "./terminal";

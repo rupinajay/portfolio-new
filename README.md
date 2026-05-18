@@ -1,5 +1,72 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Features
+
+### Interactive Terminal Mode
+This portfolio includes a unique Linux-style terminal interface that allows visitors to explore your portfolio using command-line commands.
+
+**How to access:**
+- Click the "Terminal" button in the top-right corner of the page
+- Press `ESC` to exit terminal mode
+
+**Available Commands:**
+- `ls [options] [path]` - List directory contents (-l for long format, -a for all files)
+- `cd <path>` - Change directory (supports `..`, `~`, `-`, or no args for home)
+- `cat <file>` - Display file contents (prints to terminal)
+- `nano <file>` - Open file in nano editor (Ctrl+X to exit)
+- `vim <file>` or `vi <file>` - Open file in vim editor (ESC to exit)
+- `less <file>` or `more <file>` - View file with pager (q to quit)
+- `pwd` - Print working directory
+- `tree` - Display directory tree structure with counts
+- `clear` or `cls` - Clear terminal screen
+- `whoami` - Display current user
+- `echo <text>` - Display a line of text
+- `history` - Show command history
+- `date` - Display current date and time
+- `uname [-a]` - Display system information
+- `hostname` - Display hostname
+- `mkdir <dir>` - Create directory (simulated, read-only)
+- `touch <file>` - Create file (simulated, read-only)
+- `rm <file>` - Remove file (simulated, read-only)
+- `cp <src> <dest>` - Copy file (simulated, read-only)
+- `mv <src> <dest>` - Move file (simulated, read-only)
+- `man <command>` - Display manual (simulated)
+- `sudo <command>` - Run as superuser (simulated)
+- `help` or `--help` - Show available commands
+- `exit`, `quit`, or `logout` - Close terminal
+
+**File System Structure:**
+```
+/home/rupin/
+├── about/
+│   └── bio.txt
+├── experience/
+│   ├── linarc.txt
+│   ├── gravix.txt
+│   ├── anand.txt
+│   ├── zyngate.txt
+│   └── glencore.txt
+├── projects/
+│   ├── sustain.txt
+│   ├── statiq.txt
+│   └── text-to-sql.txt
+├── skills/
+│   └── technical.txt
+├── education/
+│   └── academic.txt
+├── contact/
+│   └── info.txt
+└── awards/
+    └── recognition.txt
+```
+
+**Terminal Features:**
+- Full-screen terminal interface with no page scrolling
+- Command history navigation (↑/↓ arrow keys)
+- Tab completion for file and directory names
+- Theme-aware (respects light/dark mode)
+- Linux-style command prompt with colored output
+
 ## Getting Started
 
 First, run the development server:
